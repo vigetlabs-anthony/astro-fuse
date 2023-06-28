@@ -1,0 +1,54 @@
+---
+const { page, isHome, category } = Astro.props;
+const { url, start, end, size, total, currentPage, lastPage } = page;
+const paginationList = Array.from({ length: lastPage }, (_, i) => i + 1);
+const path = isHome ? "/" : `/${category}/`;
+---
+
+<nav aria-label="Blog pages" class="flex gap-4 items-center">
+  <a
+    class={url.prev
+      ? "ring-black ring-2 rounded-2xl block w-24 text-center hover:ring-0"
+      : "ring-black ring-2 w-24 pointer-events-none text-center rounded-2xl bg-gray-400 text-gray-200"}
+    href={url.prev}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6 mx-auto"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+    </svg>
+  </a>
+  {
+    paginationList.map((item, index) => (
+      <a href={`${index + 1 === 1 ? path : path + (index + 1)}`}>{index + 1}</a>
+    ))
+  }
+  <a
+    class={url.next
+      ? "ring-black ring-2 rounded-2xl block w-24 text-center hover:ring-0 "
+      : "ring-black ring-2 w-24 text-center pointer-events-none rounded-2xl bg-gray-400 text-gray-200"}
+    href={url.next}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6 mx-auto"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+    </svg>
+  </a>
+</nav>

@@ -1,0 +1,15 @@
+---
+import Head from "../components/Head.astro";
+import Header from "../components/Header.astro";
+const { title, description } = Astro.props;
+let links;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <Head {title} {description} />
+  <Header {links} />
+  <body>
+    <slot />
+  </body>
+</html>

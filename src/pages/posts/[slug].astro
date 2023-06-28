@@ -1,0 +1,18 @@
+---
+import { generateSlug } from "../../static/utils";
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob("../../content/*.md");
+
+  return allPosts.map((post) => {
+    return {
+      params: { slug: generateSlug(post.frontmatter.title) },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+---
+
+<post.Content />

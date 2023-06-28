@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SearchBar from "../components/SearchBar.astro";
+import ContentCard from "../components/ContentCard.astro";
+import Pagination from "../components/Pagination.astro";
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob("../content/*.md");
+  return paginate(allPosts, { pageSize: 4 });
+}
+const { page } = Astro.props;
+---
+
+<BaseLayout title={"home"} description={"Astro x search home page"}>
+  <div
+    class="max-w-3xl mx-auto min-h-screen flex flex-col items-center justify-center gap-4"
+  >
+    <div class="h-fit">
+      <SearchBar />
+    </div>
+    <ul class="flex gap-4 mt-4">
+      {
+        page.data.map((post) => {
+          return (
+            <li>
+              <ContentCard {post} />
+            </li>
+          );
+        })
+      }
+    </ul>
+    <Pagination {page} isHome={true} />
+  </div>
+</BaseLayout>

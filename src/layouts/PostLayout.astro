@@ -1,0 +1,15 @@
+---
+const { frontmatter } = Astro.props;
+const { title, category } = frontmatter;
+import BaseLayout from "./BaseLayout.astro";
+---
+
+<BaseLayout>
+  <div class="min-h-screen flex justify-center items-center">
+    <div class="w-1/2 prose">
+      <h1 class="text-center">{title}</h1>
+      <small class="text-center block">{category}</small>
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

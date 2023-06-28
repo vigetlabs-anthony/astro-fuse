@@ -1,0 +1,17 @@
+---
+const { post } = Astro.props;
+const { title, category } = post.frontmatter;
+const slug = generateSlug(title);
+import { generateSlug } from "../static/utils";
+---
+
+<div class="ring-1 p-2 rounded-lg">
+  <a href={`/posts/${slug}`}>{title}</a>
+  <div>
+    <a
+      href={category}
+      class="underline text-indigo-400 underline-offset-2 hover:underline-offset-8"
+      >{category}</a
+    >
+  </div>
+</div>
